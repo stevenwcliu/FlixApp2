@@ -46,6 +46,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -66,14 +67,25 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // sender is the cell that we tap on
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        print("Loading up the details screen")
+        // Find the selected movie
+        let cell = sender as! UITableViewCell //the cell that we tap on
+        let indexPath = tableView.indexPath(for: cell)! //table view of the cell
+        let movie = movies[indexPath.row]
+        
+        // Pass the selected movie to the details view controller
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
+    
 }
